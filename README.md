@@ -1,3 +1,11 @@
+## Explications simplifiés
+
+Lancer npm install pour mettre en place toutes les librairies nécéssaires.
+
+Lancer node server.js pour lancer le serveur mongo
+Lancer ng serve pour pour lancer l'appli web sur le localhost:4200
+
+
 # MongoCRUD
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 6.2.3.
