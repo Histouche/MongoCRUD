@@ -1,0 +1,48 @@
+<div class="panel panel-primary">
+  <div class="panel-heading">
+    {{ title }}
+  </div>
+  <div class="panel-body">
+
+    <form [formGroup]="angForm" novalidate>
+        <div class="form-group">
+          <label class="col-md-4">Libellé</label>
+          <input type="text" class="form-control" formControlName="libelle" id="libelleS" #libelle  (change)="libelleChange()"/>
+        </div>
+        <div *ngIf="angForm.controls['libelle'].invalid && (angForm.controls['libelle'].dirty || angForm.controls['libelle'].touched)" class="alert alert-danger">
+          <div *ngIf="angForm.controls['libelle'].errors.required">
+              Le libellé est obligatoire.
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="col-md-4">Espèce</label>
+          <select name="espece" id="especeSelect" (change)="especeChange()">
+              <option *ngFor="let espece of especes" [value]="espece._id">{{espece._id}}</option>
+          </select>
+        </div>
+        <div class="form-group">
+            <label class="col-md-4">Genre</label>
+            <select name="genre" id="genreSelect" (change)="genreChange()">
+                <option *ngFor="let gen of genre" [value]="gen._id">{{gen._id}}</option>
+            </select>
+          </div>
+            <div class="form-group">
+                <label class="col-md-4">Arrondissement</label>
+                <select name="arrondissement" id="arrSelect" (change)="arrChange()">
+                    <option default disabled>arrondissement</option>
+                    <option *ngFor="let arr of arrondissement" [value]="arr._id">{{arr._id}}</option>
+                </select>
+              </div>
+              <div class="form-group">
+                  <label class="col-md-4">Type d'emplacement</label>
+                  <select name="emplacement" id="typeSelect" (change)="typeChange()">
+                      <option *ngFor="let emp of emplacement" [value]="emp._id">{{emp._id}}</option>
+                  </select>
+                </div>
+        
+          <div class="form-group">
+            <button (click)="updateArbre()" [disabled]="angForm.pristine || angForm.invalid" class="btn btn-primary">Modifier cet arbre</button>
+          </div>
+      </form>
+  </div>
+</div>

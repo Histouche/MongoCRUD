@@ -1,0 +1,21 @@
+.head{
+    background-color: #ccc;
+}
+.edit-icon{
+    color: #303f9f;
+    padding: 5px;
+    cursor: pointer;
+}
+.del-icon{
+    color: #b71c1c;
+    border: none;
+    background: none;
+    padding: 5px;
+    cursor: pointer;
+}
+.ngx-pagination{
+    padding: 0;
+}
+.table-rows > .col > .table-row:nth-child(odd){
+    background-color: #dedede;
+}

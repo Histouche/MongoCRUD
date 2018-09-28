@@ -1,0 +1,177 @@
+
+<div class="col-12 mb-2">
+    <div class="row justify-content-center">
+        <h1 class="col-auto">Liste des arbres de Paris</h1>
+    </div>
+</div>
+<div class="col-12 mb-3">
+    <div class="row">
+        <div class="col-auto">
+            Filtres :
+        </div>
+        <div class="col">
+                 <select name="genre" id="genreSelect" (change)="genreChange()">
+                    <option default disabled>Genres</option>
+                    <option *ngFor="let gen of genre" [value]="gen._id">{{gen._id}}</option>
+                </select>
+                <!--<mat-form-field>
+                    <mat-select placeholder="Filtrer par genre" name="genre" (selectionChange)="changeAction(genre)" [(ngModel)]="genre" >
+                        <mat-option *ngFor="let gen of genre" [value]="gen._id" >{{ gen._id }}</mat-option>
+                    </mat-select>
+                    </mat-form-field>-->
+            </div>
+        <div class="col">
+            <select name="espece" id="especeSelect" (change)="especeChange()">
+                <option default disabled>Espèce</option>
+            
+                <ng-container *ngFor="let espece of especes">
+                        <option *ngIf="espece._id !== null" [value]="espece._id">{{espece._id}}</option>
+                </ng-container>
+                
+            </select>
+        </div>
+        <div class="col">
+            <select name="arrondissement" id="arrSelect" (change)="arrChange()">
+                    <option default disabled>arrondissement</option>
+                <ng-container *ngFor="let arr of arrondissement">
+                        <option *ngIf="arr._id !== null" [value]="arr._id">{{arr._id}}</option>
+                </ng-container>
+            </select>
+        </div>
+        <div class="col">
+                <select name="emplacement" id="typeSelect" (change)="typeChange()">
+                        <option default disabled>Type d'emplacement</option>
+                    <ng-container *ngFor="let emp of emplacement">
+                            <option *ngIf="emp._id !== null" [value]="emp._id">{{emp._id}}</option>
+                    </ng-container>
+                </select>
+            </div>
+    </div>
+</div>
+<!--<div class="col-12 mb-3">
+    <div class="row">
+        <div class="col">
+            <div class="row">
+                <div class="col-auto">Trier par :</div>
+                <div class="col">
+                    <input id="circonference" name="filtre" class="input-radio d-none" type="radio">
+                    <label for="circonference" class="label-radio">Circonférence</label>
+                </div>
+                <div class="col">
+                    <input id="hauteur" name="filtre" class="input-radio d-none" type="radio">
+                    <label for="hauteur" class="label-radio">Hauteur</label>
+                </div>
+            </div>
+        </div>
+        <div class="col-auto">
+            <div class="row">
+                <button class="col-12 btn btn-primary">Afficher la carte</button>
+            </div>
+        </div>
+    </div>
+</div>-->
+<div class="col-12 my-3">
+    <div class="row justify-content-center">
+            <button class="col-auto btn btn-primary" (click)="search()">Actualiser la liste</button>
+    </div>
+</div>
+<div class="col-12 tab-arbres">
+    <div class="row head py-2">
+        <div class="col">
+            <div class="row">
+                <div class="col">
+                    Libellé
+                </div>
+                <div class="col">
+                    Espèce
+                </div>
+                <div class="col">
+                    Genre
+                </div>
+                <div class="col">
+                    Lieu
+                </div>
+                <div class="col">
+                    Circonférence (cm)
+                </div>
+                <div class="col">
+                    Hauteur(m)
+                </div>
+            </div>
+        </div>
+        <div class="col-2">
+            <div class="row">
+                Actions
+            </div>
+        </div>
+    </div>
+    <div class="row table-rows">
+        <div class="col">
+            <div class="row py-1 table-row" *ngFor="let arbre of arbres | paginate: {itemsPerPage: 10, currentPage: p }">
+                <div class="col">
+                    <div class="row h-100 align-items-center">
+                        <div class="col">{{arbre.fields.libellefrancais}}</div>
+                        <div class="col">{{arbre.fields.espece}}</div>
+                        <div class="col">{{arbre.fields.genre}}</div>
+                        <div class="col">{{arbre.fields.arrondissement}}</div>
+                        <div class="col">{{arbre.fields.circonferenceencm}}</div>
+                        <div class="col">{{arbre.fields.hauteurenm}}</div>
+                    </div> 
+                </div>
+                <div class="col-2">
+                    <div class="row">
+                        <a [routerLink]="['/edit', arbre._id]" class="edit-icon"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
+                        <button (click)="deleteArbre(arbre._id)"  class="del-icon"><i class="fa fa-times" aria-hidden="true"></i></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="row justify-content-center">
+        <pagination-controls (pageChange)="p = $event" class="p-0"></pagination-controls>
+    </div>
+</div>
+
+<!--<table class="table table-hover">
+  <thead>
+  <tr>
+      <td>recordid</td>
+      <td>Libellé</td>
+      <td>date Plantation</td>
+      <td>circonférence</td>
+      <td>Hauteur</td>
+      <td>Espèce</td>
+      <td>Adresse</td>
+      <td>Longitude</td>
+      <td>Lattitude</td>
+      <td>Pépinière</td>
+      <td>Stade de développement</td>
+      <td>Genre</td>
+      <td>Type d'emplacement</td>
+      <td colspan="2">Actions</td>
+  </tr>
+  </thead>
+
+  <tbody>
+      <tr *ngFor="let arbre of arbres | paginate: {itemsPerPage: 10, currentPage: p }">
+          <td>{{ arbre.recordid}}</td>
+            <td>{{ arbre.libelle }}</td>
+          <td>{{ arbre.date_plantation }}</td>
+          <td>{{ arbre.circonference }}</td>
+          <td>{{ arbre.hauteur }}</td>
+          <td>{{ arbre.espece }}</td>
+          <td>{{ arbre.adresse }}</td>
+          <td>{{ arbre.longitude }}</td>
+          <td>{{ arbre.lattitude }}</td>
+          <td>{{ arbre.pepiniere }}</td>
+          <td>{{ arbre.stade_develloppement }}</td>
+          <td>{{ arbre.remarquable }}</td>
+          <td>{{ arbre.genre }}</td>
+          <td>{{ arbre.type_emplacement }}</td>
+          <td><a [routerLink]="['/edit', arbre._id]" class="btn btn-primary">Edit</a></td>
+          <td><button (click)="deleteArbre(arbre._id)"  class="btn btn-danger">Delete</button></td>
+      </tr>
+  </tbody>
+</table>
+-->
