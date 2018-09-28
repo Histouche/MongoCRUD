@@ -2,7 +2,10 @@
 
 Lancer npm install pour mettre en place toutes les librairies nécéssaires.
 
+Le JSON utilisé est celui des arbres de Paris.
+
 Lancer node server.js pour lancer le serveur mongo
+
 Lancer ng serve pour pour lancer l'appli web sur le localhost:4200
 
 
